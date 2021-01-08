@@ -1,4 +1,5 @@
-﻿using System;
+﻿// 栈，队列和链表的实验
+using System;
 
 namespace QueueStackLinkedList
 {

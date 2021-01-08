@@ -1,13 +1,21 @@
+// 第二章栈，队列和链表的实现
 using System;
 
 namespace QueueStackLinkedList
 {
+    /// <summary>
+    /// 栈实现
+    /// </summary>
     [Serializable]
     public class Stack
     {
-
+        //todo 实现之
     }
 
+    /// <summary>
+    /// 队列实现
+    /// </summary>
+    /// <typeparam name="T">type of items in the queue</typeparam>
     [Serializable]
     public class Queue<T>
     {
@@ -121,11 +129,11 @@ namespace QueueStackLinkedList
         }
     }
     /// <summary>
-    /// the linked list implementation
+    /// 链表实现
     /// </summary>
     [Serializable]
     public class LinkedList
     {
-
+        //todo 实现之
     }
 }

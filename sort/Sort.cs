@@ -1,8 +1,10 @@
+// 第一章的简单排序算法实现
 using System.Collections;
 using System;
 
 namespace sort
 {
+    // 冒泡和快速排序算法的实现
     public static class Sort
     {
         /// <summary>
