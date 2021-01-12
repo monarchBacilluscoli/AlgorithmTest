@@ -11,7 +11,7 @@ namespace QueueStackLinkedList
             {
                 return true;
             }
-            Stack<Int32> st = new Stack<Int32>();
+            MyStack<Int32> st = new MyStack<Int32>();
             Int32 mid = s.Length / 2;
             for (int i = 0; i < mid; i++)
             {
@@ -31,7 +31,7 @@ namespace QueueStackLinkedList
         }
         static void LinkedListTest()
         {
-            LinkedList<Int32> list = new LinkedList<int>(new int[] { 11, 14, 16, 98, 192 });
+            MyLinkedList<Int32> list = new MyLinkedList<int>(new int[] { 11, 14, 16, 98, 192 });
             var foreNode = list.Find((ListNode<Int32> data) => { return data.Next.Data.CompareTo(14) > 0; });
             list.Insert(foreNode, 15);
             ListNode<Int32> temp = list.Head;
@@ -48,14 +48,14 @@ namespace QueueStackLinkedList
                 return;
             }
             {// small cat fishing
-                Queue<Int32> xiaoHeng = new Queue<Int32>(new Int32[] { 2, 4, 1, 2, 5, 6 }, 100), xiaoHa = new Queue<Int32>(new int[] { 3, 1, 3, 5, 6, 4 }, 100);
-                Stack<Int32> table = new Stack<Int32>();
+                MyQueue<Int32> xiaoHeng = new MyQueue<Int32>(new Int32[] { 2, 4, 1, 2, 5, 6 }, 100), xiaoHa = new MyQueue<Int32>(new int[] { 3, 1, 3, 5, 6, 4 }, 100);
+                MyStack<Int32> table = new MyStack<Int32>();
 
                 bool isXiaoHengTurn = true;
                 while (!(xiaoHa.Empty || xiaoHeng.Empty)) // Both hands are not empty, continue
                 {
                     //todo plays
-                    Queue<Int32> player = isXiaoHengTurn ? xiaoHeng : xiaoHa;
+                    MyQueue<Int32> player = isXiaoHengTurn ? xiaoHeng : xiaoHa;
                     Int32 card = player.Pop();
                     int sameCardIndex = -1;
                     for (int i = 0; i < table.Size; i++)
@@ -101,7 +101,7 @@ namespace QueueStackLinkedList
             }
             {// Queue test
                 int[] encrypted_nums = { 6, 3, 1, 7, 5, 8, 9, 2, 4 }; // the array to be decrypted.
-                Queue<int> que = new Queue<int>(encrypted_nums, 10);
+                MyQueue<int> que = new MyQueue<int>(encrypted_nums, 10);
                 while (!que.Empty)
                 {
                     System.Console.WriteLine(que.Pop().ToString() + "\t"); // pop the first one, note it as an item in the decrypted qq

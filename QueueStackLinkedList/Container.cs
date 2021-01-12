@@ -43,7 +43,7 @@ namespace QueueStackLinkedList
     /// 栈实现
     /// </summary>
     [Serializable]
-    public class Stack<T> //todo 考虑下线程安全
+    public class MyStack<T> //todo 考虑下线程安全
     {
         /// <summary>
         /// Reference of the item on top of the stack
@@ -56,7 +56,7 @@ namespace QueueStackLinkedList
         /// <summary>
         /// Construct an empty stack
         /// </summary>
-        public Stack()
+        public MyStack()
         {
             m_top = null; m_size = 0;
         }
@@ -122,7 +122,7 @@ namespace QueueStackLinkedList
     /// </summary>
     /// <typeparam name="T">type of items in the queue</typeparam>
     [Serializable]
-    public class Queue<T>
+    public class MyQueue<T>
     {
         /// <summary>
         /// the core data contained by queue
@@ -140,7 +140,7 @@ namespace QueueStackLinkedList
         /// ctor
         /// </summary>
         /// <param name="capacity">the maximum capacity of the queue</param>
-        public Queue(int capacity)
+        public MyQueue(int capacity)
         {
             capacity = capacity < 2 ? 2 : capacity;
             m_data = new T[capacity];
@@ -152,7 +152,7 @@ namespace QueueStackLinkedList
         /// <param name="array">the initial array of the queue</param>
         /// <param name="capacity">the maximum capacity of the queue</param>
         /// <returns>an initialized queue</returns>
-        public Queue(int[] array, int capacity) : this(capacity)
+        public MyQueue(int[] array, int capacity) : this(capacity)
         {
             if (array.Length > capacity)
             {
@@ -238,11 +238,11 @@ namespace QueueStackLinkedList
     /// 啊好难啊
     /// </summary>
     [Serializable]
-    public class LinkedList<T> where T : IComparable
+    public class MyLinkedList<T> where T : IComparable
     {
-        public LinkedList() : this(new T[] { })
+        public MyLinkedList() : this(new T[] { })
         { }
-        public LinkedList(T[] array)
+        public MyLinkedList(T[] array)
         {
             if (array.Length == 0)
             {
