@@ -4,6 +4,9 @@ using QueueStackLinkedList;
 
 namespace search
 {
+    /// <summary>
+    /// A map respresented by grids (unfinished)
+    /// </summary>
     internal class GridMap
     {
         protected int[,] m_mapArray;
@@ -14,6 +17,9 @@ namespace search
             throw new NotImplementedException();
         }
     }
+    /// <summary>
+    /// A point struct
+    /// </summary>
     public struct Point
     {
         public Point(int rx, int ry)
@@ -47,6 +53,9 @@ namespace search
             return String.Format("({0}, {1})", x, y);
         }
     }
+    /// <summary>
+    /// A static class contains some search algorithms and problems
+    /// </summary>
     public static class Search
     {
         /// <summary>
@@ -60,10 +69,17 @@ namespace search
             new Point(-1, 0)// up
             };
 
-        public static void FindPath(int[,] map, Point start, Point target)
+        /// <summary>
+        /// Find the path of a map, you must send your own method into this
+        /// </summary>
+        /// <param name="map">The map on which to find the way</param>
+        /// <param name="start">The start position</param>
+        /// <param name="target">The target position</param>
+        /// <param name="pathFinder">The path finding algoritm</param>
+        public static void FindPath(int[,] map, Point start, Point target, Func<int[,], Point, Point, LinkedList<Point>> pathFinder)
         {
             // var path = DeepFirstSearch(map, start, target);
-            var path = BreadthFirstSearch(map, start, target);
+            var path = pathFinder(map, start, target);
             foreach (var item in path)
             {
                 Console.Write("{0}\t", item);
@@ -112,7 +128,17 @@ namespace search
             int shortestLength = DeepFirstSearch_(map, start, target, path, Int32.MaxValue, ref shortestPath);
             return shortestPath;
         }
-        public static Int32 DeepFirstSearch_(int[,] map, Point start, Point target, LinkedList<Point> path, Int32 shortestLength, ref LinkedList<Point> shortedPath)
+        /// <summary>
+        /// Find the shortest way by DFS
+        /// </summary>
+        /// <param name="map">The map on which to find the way</param>
+        /// <param name="start">The start position</param>
+        /// <param name="target">The target position</param>
+        /// <param name="path">The current path</param>
+        /// <param name="shortestLength">The current shortest path length. not using the shortedPath.Count since it is 0 at first, but I need it to be MAX</param>
+        /// <param name="shortestPath">The current shortest path, passed between recursion called function to note the shortest way</param>
+        /// <returns></returns>
+        public static Int32 DeepFirstSearch_(int[,] map, Point start, Point target, LinkedList<Point> path, Int32 shortestLength, ref LinkedList<Point> shortestPath)
         {
             path.AddLast(start);
             map[start.x, start.y] = -1;
@@ -121,7 +147,7 @@ namespace search
                 if (shortestLength > path.Count)
                 {
                     shortestLength = path.Count;
-                    shortedPath = new LinkedList<Point>(path);  // value type can use this
+                    shortestPath = new LinkedList<Point>(path);  // value type can use this
                 }
             }
             else
@@ -131,7 +157,7 @@ namespace search
                     Point next = start + s_directions[i];
                     if (next.x >= 0 && next.y >= 0 && next.x < map.GetLength(0) && next.y < map.GetLength(1) && map[next.x, next.y] == 0) // 没走过(-1), 没障碍(1)，可以走(0)
                     {
-                        Int32 newLength = DeepFirstSearch_(map, next, target, path, shortestLength, ref shortedPath);
+                        Int32 newLength = DeepFirstSearch_(map, next, target, path, shortestLength, ref shortestPath);
                         if (newLength < shortestLength)
                         {
                             shortestLength = newLength;
@@ -144,6 +170,12 @@ namespace search
             return shortestLength;
         }//todo 可以用栈来避免递归，不过可能需要另一个栈辅助，用来记录是第几个方向。或者直接记录方向好了。
 
+        /// <summary>
+        /// Find the shortest way by BFS
+        /// </summary>
+        /// <param name="map">The map on which to find the way</param>
+        /// <param name="start">The start position</param>
+        /// <param name="target">The target position</param>
         public static LinkedList<Point> BreadthFirstSearch(Int32[,] map, Point start, Point target)
         {
             LinkedList<Point> path = new LinkedList<Point>();

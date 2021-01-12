@@ -14,7 +14,7 @@ namespace search
                     {0,1,0,0},
                     {0,0,0,1}
                 };
-                Search.FindPath(map, new Point(0, 0), new Point(3, 2));
+                Search.FindPath(map, new Point(0, 0), new Point(3, 2), Search.BreadthFirstSearch);
             }
         }
     }
