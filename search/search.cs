@@ -121,11 +121,11 @@ namespace search
         /// <param name="map">The map on which to find the way</param>
         /// <param name="start">The start position</param>
         /// <param name="target">The target position</param>
-        public static LinkedList<Point> DeepFirstSearch(int[,] map, Point start, Point target)
+        public static LinkedList<Point> DeepFirstSearchFindPath(int[,] map, Point start, Point target)
         {
             LinkedList<Point> path = new LinkedList<Point>();
             LinkedList<Point> shortestPath = new LinkedList<Point>();
-            int shortestLength = DeepFirstSearch_(map, start, target, path, Int32.MaxValue, ref shortestPath);
+            int shortestLength = DeepFirstSearchFindPath_(map, start, target, path, Int32.MaxValue, ref shortestPath);
             return shortestPath;
         }
         /// <summary>
@@ -138,7 +138,7 @@ namespace search
         /// <param name="shortestLength">The current shortest path length. not using the shortedPath.Count since it is 0 at first, but I need it to be MAX</param>
         /// <param name="shortestPath">The current shortest path, passed between recursion called function to note the shortest way</param>
         /// <returns></returns>
-        public static Int32 DeepFirstSearch_(int[,] map, Point start, Point target, LinkedList<Point> path, Int32 shortestLength, ref LinkedList<Point> shortestPath)
+        public static Int32 DeepFirstSearchFindPath_(int[,] map, Point start, Point target, LinkedList<Point> path, Int32 shortestLength, ref LinkedList<Point> shortestPath)
         {
             path.AddLast(start);
             map[start.x, start.y] = -1;
@@ -157,7 +157,7 @@ namespace search
                     Point next = start + s_directions[i];
                     if (next.x >= 0 && next.y >= 0 && next.x < map.GetLength(0) && next.y < map.GetLength(1) && map[next.x, next.y] == 0) // 没走过(-1), 没障碍(1)，可以走(0)
                     {
-                        Int32 newLength = DeepFirstSearch_(map, next, target, path, shortestLength, ref shortestPath);
+                        Int32 newLength = DeepFirstSearchFindPath_(map, next, target, path, shortestLength, ref shortestPath);
                         if (newLength < shortestLength)
                         {
                             shortestLength = newLength;
@@ -176,7 +176,7 @@ namespace search
         /// <param name="map">The map on which to find the way</param>
         /// <param name="start">The start position</param>
         /// <param name="target">The target position</param>
-        public static LinkedList<Point> BreadthFirstSearch(Int32[,] map, Point start, Point target)
+        public static LinkedList<Point> BreadthFirstSearchFindPath(Int32[,] map, Point start, Point target)
         {
             LinkedList<Point> path = new LinkedList<Point>();
             Nullable<Point>[,] pre = new Nullable<Point>[map.GetLength(0), map.GetLength(1)];
@@ -212,7 +212,39 @@ namespace search
                 }
             }
             return null;
+        }
+        public static int CalculateArea(int[,] map, Point start, Func<int[,], Point, int> areaCalculator)
+        {
+            return areaCalculator(map, start);
+        }
+        public static int BFSCalculateArea(int[,] map, Point start)
+        {
+            if (map[start.x, start.y] != 1)
+            {
+                return 0;
+            }
+            int area = 0;
+            MyQueue<Point> unfoldingPoints = new MyQueue<Point>(2501);
+            Int32[,] book = new int[map.GetLength(0), map.GetLength(1)];
+            unfoldingPoints.Push(start);
+            book[start.x, start.y] = 1;
 
+            while (!unfoldingPoints.Empty)
+            {
+                //todo 出队，逐个展开\标记\面积，入队
+                Point currentPoint = unfoldingPoints.Pop();
+                area++;
+                for (int i = 0; i < s_directions.Length; i++)
+                {
+                    Point temp = currentPoint + s_directions[i];
+                    if (temp.x < map.GetLength(0) && temp.x >= 0 && temp.y < map.GetLength(1) && temp.y >= 0 && book[temp.x, temp.y] == 0 && map[temp.x, temp.y] == 1)
+                    {
+                        unfoldingPoints.Push(temp);
+                        book[temp.x, temp.y] = 1;
+                    }
+                }
+            }
+            return area;
         }
     }
 }
