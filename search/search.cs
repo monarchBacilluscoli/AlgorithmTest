@@ -52,6 +52,10 @@ namespace search
         {
             return String.Format("({0}, {1})", x, y);
         }
+        public override bool Equals(object obj) //! This implementation has some problems
+        {
+            return base.Equals(obj) && (Point)obj == this;
+        }
     }
     /// <summary>
     /// A static class contains some search algorithms and problems
