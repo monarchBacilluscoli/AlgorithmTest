@@ -22,6 +22,10 @@ namespace search
     /// </summary>
     public struct Point
     {
+        public static int GetManhattanDis(Point from, Point to)
+        {
+            return Math.Abs(from.x - to.x) + Math.Abs(from.y - to.y);
+        }
         public Point(int rx, int ry)
         {
             x = rx;
@@ -66,7 +70,7 @@ namespace search
         /// The supported directions array
         /// </summary>
         /// <value>4 direction based on the 2D array index</value>
-        static Point[] s_directions = new Point[]{
+        public static Point[] s_directions = new Point[]{
             new Point(0,1), // right 
             new Point(1,0), // down
             new Point(0,-1),// left
@@ -97,18 +101,18 @@ namespace search
                     {
                         case 1:
                             {
-                                System.Console.Write("* ");
+                                System.Console.Write("x ");
                                 break;
                             }
                         case 0:
                             {
                                 if (path.Contains(new Point(i, j)))
                                 {
-                                    System.Console.Write(". ");
+                                    System.Console.Write("* ");
                                 }
                                 else
                                 {
-                                    System.Console.Write("  ");
+                                    System.Console.Write(". ");
                                 }
                                 break;
                             }

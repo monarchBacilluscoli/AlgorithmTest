@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTraverse", "GraphTrave
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindShortestPath", "FindShortestPath\FindShortestPath.csproj", "{88F3B8A2-B502-4175-9C50-ACF6BFDDC6D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree", "Tree\Tree.csproj", "{B286A611-2156-450E-90B0-0EF5B6DD40D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{88F3B8A2-B502-4175-9C50-ACF6BFDDC6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F3B8A2-B502-4175-9C50-ACF6BFDDC6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F3B8A2-B502-4175-9C50-ACF6BFDDC6D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B286A611-2156-450E-90B0-0EF5B6DD40D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B286A611-2156-450E-90B0-0EF5B6DD40D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B286A611-2156-450E-90B0-0EF5B6DD40D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B286A611-2156-450E-90B0-0EF5B6DD40D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

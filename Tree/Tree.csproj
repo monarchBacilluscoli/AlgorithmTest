@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\search\search.csproj" />
+    <ProjectReference Include="..\QueueStackLinkedList\QueueStackLinkedList.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

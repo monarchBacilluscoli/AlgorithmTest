@@ -1,4 +1,5 @@
 ﻿using System;
+using search;
 
 namespace FindShortestPath
 {
@@ -8,6 +9,17 @@ namespace FindShortestPath
         static void Main(string[] args)
         {
             const int MAX = Int32.MaxValue / 2;
+            {
+                int[,] map = new int[5, 4]{
+                    {0,0,1,0},
+                    {0,0,0,0},
+                    {0,0,1,0},
+                    {0,1,0,0},
+                    {0,0,0,1}
+                };
+                Search.FindPath(map, new Point(0, 0), new Point(3, 2), PathFinder.AStar);
+                return;
+            }
             {// dijkstra算法测试
                 int[,] matrix = {
                     {0,1,12,MAX,MAX,MAX},
