@@ -35,10 +35,13 @@ namespace Tree
         }
         public BinaryHeap(T[] array, bool isMax = true) : this(array.Length * 2, isMax)
         {
-            for (int i = 0; i < array.Length; i++) //! not the optimal implementation.
+            Array.Copy(array, m_data, array.Length);
+            m_count = array.Length;
+            for (int i = m_count / 2 - 1; i >= 0; i--) //! not the optimal implementation.
             {
-                Push(array[i]);
+                ShiftDown(i);
             }
+            return;
         }
         public BinaryHeap() : this(50) { }
         public void Push(T item)
@@ -70,36 +73,7 @@ namespace Tree
 
             m_data[0] = m_data[m_count];
             //todo adjust
-            int count = 0;
-            while (LeftChildIndex(count) < m_count)
-            {
-                int exchangeIndex;
-                if (RightChildIndex(count) < m_count)
-                {
-                    if (m_comparator(m_data[LeftChildIndex(count)], m_data[RightChildIndex(count)]) > 0)
-                    {
-                        exchangeIndex = LeftChildIndex(count);
-                    }
-                    else
-                    {
-                        exchangeIndex = RightChildIndex(count);
-                    }
-                }
-                else
-                {
-                    exchangeIndex = LeftChildIndex(count);
-                }
-                if (m_comparator(m_data[count], m_data[exchangeIndex]) > 0)
-                {
-                    m_data[m_count + 2] = m_data[count];
-                    m_data[count] = m_data[exchangeIndex];
-                    m_data[exchangeIndex] = m_data[m_count + 2];
-                }
-                else
-                {
-                    break;
-                }
-            }
+            ShiftDown(0);
             return m_data[m_count + 1];
         }
         public int Count
@@ -130,6 +104,39 @@ namespace Tree
         protected int RightChildIndex(int index)
         {
             return index * 2 + 2;
+        }
+        protected void ShiftDown(int index)
+        {
+            while (LeftChildIndex(index) < m_count)
+            {
+                int exchangeIndex;
+                if (RightChildIndex(index) < m_count)
+                {
+                    if (m_comparator(m_data[LeftChildIndex(index)], m_data[RightChildIndex(index)]) > 0)
+                    {
+                        exchangeIndex = RightChildIndex(index);
+                    }
+                    else
+                    {
+                        exchangeIndex = LeftChildIndex(index);
+                    }
+                }
+                else
+                {
+                    exchangeIndex = LeftChildIndex(index);
+                }
+                if (m_comparator(m_data[index], m_data[exchangeIndex]) > 0)
+                {
+                    m_data[m_count + 2] = m_data[index];
+                    m_data[index] = m_data[exchangeIndex];
+                    m_data[exchangeIndex] = m_data[m_count + 2];
+                }
+                else
+                {
+                    break;
+                }
+                index = exchangeIndex;
+            }
         }
     }
     public class Tree
